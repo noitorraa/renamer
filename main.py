@@ -27,7 +27,6 @@ def main():
     args = parse_arguments()
     # Если --extension не указан, передаем None
     ext = args.ext if hasattr(args, 'ext') else None
-    print(f"Pattern: {args.pattern}, Ext: {ext}")  # Отладочный вывод
     renamer_functions.rename_files(args.pattern, ext)
 
 
