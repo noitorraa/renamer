@@ -1,0 +1,47 @@
+import os
+
+
+def is_safe_directory():
+    current_dir = os.getcwd()
+    unsafe_dirs = ["/", "/root", "/home", "/etc", "/bin", "/usr", "/var"]
+    return current_dir not in unsafe_dirs
+
+
+def get_file_extension(filename):
+    if "." in filename:
+        return filename.split(".")[-1]
+    return ""
+
+
+def should_rename_file(filename, ext):
+    if ext is None:
+        return True
+
+    file_ext = get_file_extension(filename)
+    if not file_ext:
+        return False
+
+    return any(filename.endswith(e) for e in ext)
+
+
+def generate_new_filename(filename, pattern, counter):
+    file_ext = get_file_extension(filename)
+    if file_ext:
+        return f"{pattern}_{counter}.{file_ext}"
+    return f"{pattern}_{counter}"
+
+
+def rename_files(pattern, ext):
+    if not is_safe_directory():
+        print("Ошибка: Выполнение в системной директории запрещено.")
+        return
+
+    counter = 1
+    for filename in os.listdir():
+        if not os.path.isfile(filename):
+            continue
+
+        if should_rename_file(filename, ext):
+            new_name = generate_new_filename(filename, pattern, counter)
+            os.rename(filename, new_name)
+            counter += 1
