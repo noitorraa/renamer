@@ -15,13 +15,17 @@ def get_file_extension(filename):
 
 def should_rename_file(filename, ext):
     if ext is None:
+        print(f"{filename}: ext is None, переименовываем")  # Отладочный вывод
         return True
 
     file_ext = get_file_extension(filename)
     if not file_ext:
+        print(f"{filename}: нет расширения, пропускаем")  # Отладочный вывод
         return False
 
-    return any(filename.endswith(e) for e in ext)
+    result = any(filename.endswith(e) for e in ext)
+    print(f"{filename}: file_ext={file_ext}, ext={ext}, result={result}")  # Отладочный вывод
+    return result
 
 
 def generate_new_filename(filename, pattern, counter):
@@ -43,5 +47,6 @@ def rename_files(pattern, ext):
 
         if should_rename_file(filename, ext):
             new_name = generate_new_filename(filename, pattern, counter)
+            print(f"Переименовываю {filename} в {new_name}")  # Отладочный вывод
             os.rename(filename, new_name)
             counter += 1
