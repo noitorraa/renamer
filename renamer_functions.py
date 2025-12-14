@@ -37,7 +37,8 @@ def rename_files(pattern, ext):
         return
 
     counter = 1
-    for filename in os.listdir():
+    # Сортируем файлы для предсказуемого порядка
+    for filename in sorted(os.listdir()):
         if not os.path.isfile(filename):
             continue
 

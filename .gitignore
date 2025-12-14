@@ -1,0 +1,25 @@
+# Виртуальное окружение
+venv/
+.env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Тесты
+.pytest_cache/
+
+# Системные файлы
+.DS_Store
+
+# Логи
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# Другие
+*.swp
+*.swo
